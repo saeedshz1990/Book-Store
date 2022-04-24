@@ -1,14 +1,16 @@
-﻿namespace BookStore.Entities
+﻿using System.Collections.Generic;
+
+namespace BookStore.Entities
 {
-    public class Category
+    public class Category :EntityBase
     {
         public Category()
         {
-            Books = new Hashset<Book>(0);
+            Books = new HashSet<Book>();
         }
 
         public string Title { get; set; }
 
-        public Hashset<Book> Books { get; set; }
+        public HashSet<Book> Books { get; set; }
     }
 }
