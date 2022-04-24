@@ -46,6 +46,30 @@ namespace BookStore.Services.Test.Unit.Categories
                 .Contain(_ => _.Title == dto.Title);
         }
 
+
+        [Fact]
+        public void GetAll_categories_returns_all()
+        {
+            var categories = new List<Category>
+            {
+                new Category { Title = "dummy1"},
+                new Category { Title = "dummy2"},
+                new Category { Title = "dummy3"}
+            };
+            _context.Manipulate(_ =>
+                _.Categories.AddRange(categories));
+
+            var expected = _sut.GetAll();
+
+            expected.Should().HaveCount(3);
+            expected.Should().Contain(_ => _.Title == "dummy1");
+            expected.Should().Contain(_ => _.Title == "dummy2");
+            expected.Should().Contain(_ => _.Title == "dummy3");
+
+        }
+
+
+        
         private static AddCategoryDto GenerateAddCategoryDto()
         {
             return new AddCategoryDto

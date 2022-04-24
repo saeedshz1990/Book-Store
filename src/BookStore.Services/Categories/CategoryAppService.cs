@@ -1,4 +1,5 @@
-﻿using BookStore.Entities;
+﻿using System.Collections.Generic;
+using BookStore.Entities;
 using BookStore.Infrastructure.Application;
 using BookStore.Services.Categories.Contracts;
 
@@ -24,6 +25,10 @@ namespace BookStore.Services.Categories
             _categoryRepository.Add(category);
             _unitOfWork.Commit();
         }
-        
+
+        public IList<GetCategoryDto> GetAll()
+        {
+            return _categoryRepository.GetAll();
+        }
     }
 }
