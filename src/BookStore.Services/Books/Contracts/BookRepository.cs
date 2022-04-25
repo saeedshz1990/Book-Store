@@ -1,4 +1,5 @@
-﻿using BookStore.Entities;
+﻿using System.Collections.Generic;
+using BookStore.Entities;
 
 namespace BookStore.Services.Books.Contracts
 {
@@ -8,5 +9,6 @@ namespace BookStore.Services.Books.Contracts
         void Update(int id, Book book);
         Book FindById(int id);
         void Delete(int id);
+        IList<GetBookDto> GetAll();
     }
 }

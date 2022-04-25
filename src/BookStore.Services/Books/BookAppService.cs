@@ -1,4 +1,5 @@
-﻿using BookStore.Entities;
+﻿using System.Collections.Generic;
+using BookStore.Entities;
 using BookStore.Infrastructure.Application;
 using BookStore.Services.Books.Contracts;
 using BookStore.Services.Books.Exceptions;
@@ -53,6 +54,11 @@ namespace BookStore.Services.Books
         {
             _bookRepository.Delete(id);
             _unitOfWork.Commit();
+        }
+
+        public IList<Book> GetAll()
+        {
+            return _bookRepository.GetAll();
         }
     }
 }

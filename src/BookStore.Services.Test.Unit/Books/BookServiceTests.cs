@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.Infrastructure.Application;
 using BookStore.Infrastructure.Test;
@@ -71,7 +72,7 @@ namespace BookStore.Services.Test.Unit.Book
 
             _context.Manipulate(_ => _.Books.Add(book));
             _sut.Update(dto, book.Id);
-            
+
             var expected = _context.Books.FirstOrDefault();
             expected.Title.Should().Be(dto.Title);
             expected.Author.Should().Be(dto.Author);
@@ -79,7 +80,7 @@ namespace BookStore.Services.Test.Unit.Book
             expected.Description.Should().Be(dto.Description);
             expected.Category.Id.Should().Be(dto.CategoryId);
         }
-        
+
         [Fact]
         public void ThrowUpdates_Exception_whenId_IsNotFound()
         {
@@ -112,6 +113,39 @@ namespace BookStore.Services.Test.Unit.Book
             _context.Books.Should().HaveCount(0);
         }
 
+
+        [Fact]
+        public void GetAll_books_WithCategory()
+        {
+            var category = CreateFactory.Create("Dummy");
+            _context.Manipulate(_ => _.Categories.Add(category));
+            var book = new List<Entities.Book>
+            {
+                new Entities.Book
+                {
+                    Title = "CleanCode",
+                    Author = "Robert C. Martin",
+                    Pages = 465,
+                    Description = "Clean Code is a handbook of guidelines for writing good software",
+                    CategoryId = category.Id
+                },
+                new Entities.Book
+                {
+                    Title = "CleanArchitecture",
+                    Author = "Robert C. Martin",
+                    Pages = 465,
+                    Description = "Clean Architecture is a handbook of guidelines for writing good software",
+                    CategoryId = category.Id
+                }
+
+            };
+            _context.Manipulate(_ => _.Books.AddRange(book));
+            var expected = _sut.GetAll();
+            expected.Should().HaveCount(2);
+            expected.Should().Contain(_ => _.Title == "DesignPattern");
+            expected.Should().Contain(_ => _.Title == "Microservice");
+        }
+        
 
         private static UpdateBookDto GenerateUpdateBookDto()
         {

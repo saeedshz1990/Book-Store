@@ -1,4 +1,6 @@
-﻿using BookStore.Entities;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BookStore.Entities;
 using BookStore.Services.Books.Contracts;
 
 namespace BookStore.Persistence.EF.Books
@@ -31,6 +33,21 @@ namespace BookStore.Persistence.EF.Books
         {
             var book = _context.Books.Find(id);
             _context.Remove(book);
+        }
+
+        public IList<GetBookDto> GetAll()
+        {
+            return _context
+                .Books
+                .Select(_ => new GetBookDto
+            {
+                Id = _.Id,
+                Title = _.Title,
+                Author = _.Author,
+                Pages = _.Pages,
+                Description = _.Description,
+                CategoryId = _.CategoryId
+            }).ToList();
         }
     }
 }
