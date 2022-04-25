@@ -8,5 +8,9 @@ namespace BookStore.Services.Categories.Contracts
     {
         void Add(Category category);
         IList<GetCategoryDto> GetAll();
+        void Update(Category category,int id);
+        GetCategoryDto FindById(int id);
+        void Delete(int id);
+
     }
 }

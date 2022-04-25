@@ -27,5 +27,16 @@ namespace BookStore.RestAPI.Controllers
         {
             return _categoryService.GetAll();
         }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _categoryService.Delete(id);
+        }
+        [HttpPut("{id}")]
+        public void Update([FromRoute]int id, [FromBody]UpdateCategoryDto dto)
+        {
+            _categoryService.Update(dto,id);
+        }
     }
 }

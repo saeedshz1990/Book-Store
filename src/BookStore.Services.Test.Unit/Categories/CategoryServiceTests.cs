@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BookStore.Entities;
 using BookStore.Infrastructure.Application;
 using BookStore.Infrastructure.Test;
@@ -46,7 +47,6 @@ namespace BookStore.Services.Test.Unit.Categories
                 .Contain(_ => _.Title == dto.Title);
         }
 
-
         [Fact]
         public void GetAll_categories_returns_all()
         {
@@ -65,11 +65,57 @@ namespace BookStore.Services.Test.Unit.Categories
             expected.Should().Contain(_ => _.Title == "dummy1");
             expected.Should().Contain(_ => _.Title == "dummy2");
             expected.Should().Contain(_ => _.Title == "dummy3");
+        }
 
+        [Fact]
+        public void Update_categories_Update_Properly()
+        {
+            int id = 1;
+            UpdateCategoryDto dto = GenerateUpdateCategoryDto();
+            var category = new List<Category>
+            {
+                new Category{ Title = "EditTest"},
+                new Category { Title = "dummy2"},
+                new Category { Title = "dummy3"}
+            };
+
+            _context.Manipulate(_ =>
+                _.Categories.AddRange(category));
+
+            Action expected = () => _sut.Update(dto, id);
+            _context.Categories.Should()
+                .Contain(_ => _.Id == dto.Id);
+        }
+
+        [Fact]
+        public void Delete_categories_Delete_Properly()
+        {
+            int id = 2;
+            var category = new List<Category>
+            {
+                new Category{ Title = "EditTest"},
+                new Category { Title = "dummy2"},
+                new Category { Title = "dummy3"}
+            };
+            _context.Manipulate(_ =>
+                _.Categories.AddRange(category));
+
+            _sut.Delete(id);
+            _context.Categories
+                .Should()
+                   .HaveCount(2);
         }
 
 
-        
+        private static UpdateCategoryDto GenerateUpdateCategoryDto()
+        {
+            return new UpdateCategoryDto
+            {
+                Id = 1,
+                Title = "Test"
+            };
+        }
+
         private static AddCategoryDto GenerateAddCategoryDto()
         {
             return new AddCategoryDto

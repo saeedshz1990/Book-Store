@@ -5,7 +5,7 @@ using BookStore.Services.Categories.Contracts;
 
 namespace BookStore.Services.Categories
 {
-    public class CategoryAppService :CategoryService
+    public class CategoryAppService : CategoryService
     {
         private readonly CategoryRepository _categoryRepository;
         private readonly UnitOfWork _unitOfWork;
@@ -29,6 +29,23 @@ namespace BookStore.Services.Categories
         public IList<GetCategoryDto> GetAll()
         {
             return _categoryRepository.GetAll();
+        }
+
+        public void Update(UpdateCategoryDto dto, int id)
+        {
+            var category = _categoryRepository.FindById(id);
+            if (category != null)
+            {
+                category.Title = dto.Title;
+
+                _unitOfWork.Commit();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            _categoryRepository.Delete(id);
+            _unitOfWork.Commit();
         }
     }
 }
