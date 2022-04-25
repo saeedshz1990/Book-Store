@@ -43,7 +43,8 @@ namespace BookStore.Infrastructure.Test
 
         private Func<TDbContext> ResolveFactory<TDbContext>() where TDbContext : DbContext
         {
-            var dbContextOptions = new DbContextOptionsBuilder<TDbContext>().UseSqlite(_connection).Options;
+            var dbContextOptions = new DbContextOptionsBuilder<TDbContext>()
+                .UseSqlite(_connection).Options;
 
             var constructor = FindSuitableConstructor<TDbContext>();
 

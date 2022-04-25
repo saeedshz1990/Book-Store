@@ -2,6 +2,7 @@
 using BookStore.Entities;
 using BookStore.Infrastructure.Application;
 using BookStore.Services.Categories.Contracts;
+using BookStore.Services.Categories.Exceptions;
 
 namespace BookStore.Services.Categories
 {
@@ -39,6 +40,10 @@ namespace BookStore.Services.Categories
                 category.Title = dto.Title;
 
                 _unitOfWork.Commit();
+            }
+            else
+            {
+                throw new CategoryNotFoundException();
             }
         }
 

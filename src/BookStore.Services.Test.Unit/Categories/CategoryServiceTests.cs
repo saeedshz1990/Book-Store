@@ -7,6 +7,7 @@ using BookStore.Persistence.EF;
 using BookStore.Persistence.EF.Categories;
 using BookStore.Services.Categories;
 using BookStore.Services.Categories.Contracts;
+using BookStore.Services.Categories.Exceptions;
 using FluentAssertions;
 using Xunit;
 
@@ -42,7 +43,6 @@ namespace BookStore.Services.Test.Unit.Categories
                 _.Categories.AddRange(category));
 
             _sut.Add(dto);
-
             _context.Categories.Should()
                 .Contain(_ => _.Title == dto.Title);
         }
@@ -70,48 +70,51 @@ namespace BookStore.Services.Test.Unit.Categories
         [Fact]
         public void Update_categories_Update_Properly()
         {
-            int id = 1;
             UpdateCategoryDto dto = GenerateUpdateCategoryDto();
-            var category = new List<Category>
+            var category = new Category
             {
-                new Category{ Title = "EditTest"},
-                new Category { Title = "dummy2"},
-                new Category { Title = "dummy3"}
+                Title = "EditTest"
             };
 
             _context.Manipulate(_ =>
                 _.Categories.AddRange(category));
 
-            Action expected = () => _sut.Update(dto, id);
+            _sut.Update(dto,category.Id);
             _context.Categories.Should()
-                .Contain(_ => _.Id == dto.Id);
+                .Contain(_ => _.Id == category.Id);
         }
 
         [Fact]
+        public void Throw_Update_CategoryNotFound()
+        {
+            var testdummyId = 20000;
+            var dto = GenerateUpdateCategoryDto();
+
+            Action expected = () => _sut.Update(dto, testdummyId);
+
+            expected.Should().ThrowExactly<CategoryNotFoundException>();
+        }
+        
+        [Fact]
         public void Delete_categories_Delete_Properly()
         {
-            int id = 2;
-            var category = new List<Category>
+            var category = new Category
             {
-                new Category{ Title = "EditTest"},
-                new Category { Title = "dummy2"},
-                new Category { Title = "dummy3"}
+                 Title = "EditTest",
             };
             _context.Manipulate(_ =>
-                _.Categories.AddRange(category));
+                _.Categories.Add(category));
 
-            _sut.Delete(id);
+            _sut.Delete(category.Id);
             _context.Categories
                 .Should()
-                   .HaveCount(2);
+                   .HaveCount(0);
         }
-
-
+        
         private static UpdateCategoryDto GenerateUpdateCategoryDto()
         {
             return new UpdateCategoryDto
             {
-                Id = 1,
                 Title = "Test"
             };
         }

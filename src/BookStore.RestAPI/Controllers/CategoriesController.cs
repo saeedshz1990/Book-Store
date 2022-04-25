@@ -14,8 +14,7 @@ namespace BookStore.RestAPI.Controllers
         {
             _categoryService = categoryService;
         }
-
-
+        
         [HttpPost]
         public void Add(AddCategoryDto dto)
         {
@@ -33,6 +32,7 @@ namespace BookStore.RestAPI.Controllers
         {
             _categoryService.Delete(id);
         }
+        
         [HttpPut("{id}")]
         public void Update([FromRoute]int id, [FromBody]UpdateCategoryDto dto)
         {

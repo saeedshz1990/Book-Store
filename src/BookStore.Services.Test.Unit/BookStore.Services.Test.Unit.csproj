@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookStore.Persistence.EF\BookStore.Persistence.EF.csproj" />
+    <ProjectReference Include="..\BookStore.Test.Tools\BookStore.Test.Tools.csproj" />
   </ItemGroup>
 
 </Project>

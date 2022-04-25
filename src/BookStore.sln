@@ -13,13 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Migrations", "BookStore.Migrations\BookStore.Migrations.csproj", "{1F6F7CD0-398C-4846-926C-9EF0BDA5BAF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Persistence.EF", "BookStore.Persistence.EF\BookStore.Persistence.EF.csproj", "{0EC3AE4A-E097-408E-AD50-33FFBEE1AB02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Persistence.EF", "BookStore.Persistence.EF\BookStore.Persistence.EF.csproj", "{0EC3AE4A-E097-408E-AD50-33FFBEE1AB02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.RestAPI", "BookStore.RestAPI\BookStore.RestAPI.csproj", "{91E2DB9E-3590-40D2-875C-BEA1D81ECF7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.RestAPI", "BookStore.RestAPI\BookStore.RestAPI.csproj", "{91E2DB9E-3590-40D2-875C-BEA1D81ECF7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Services", "BookStore.Services\BookStore.Services.csproj", "{871571CB-7353-442F-83B1-394ED55AF759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Services", "BookStore.Services\BookStore.Services.csproj", "{871571CB-7353-442F-83B1-394ED55AF759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Services.Test.Unit", "BookStore.Services.Test.Unit\BookStore.Services.Test.Unit.csproj", "{04CA88EB-C76C-40EB-ACBC-1C2CB3EAD55C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Services.Test.Unit", "BookStore.Services.Test.Unit\BookStore.Services.Test.Unit.csproj", "{04CA88EB-C76C-40EB-ACBC-1C2CB3EAD55C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Test.Tools", "BookStore.Test.Tools\BookStore.Test.Tools.csproj", "{281014E5-3951-4371-9ADE-0530039350BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{04CA88EB-C76C-40EB-ACBC-1C2CB3EAD55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04CA88EB-C76C-40EB-ACBC-1C2CB3EAD55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04CA88EB-C76C-40EB-ACBC-1C2CB3EAD55C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281014E5-3951-4371-9ADE-0530039350BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281014E5-3951-4371-9ADE-0530039350BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281014E5-3951-4371-9ADE-0530039350BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281014E5-3951-4371-9ADE-0530039350BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{91E2DB9E-3590-40D2-875C-BEA1D81ECF7E} = {F16B85B7-65AE-44D2-802F-AF931F3730B2}
 		{871571CB-7353-442F-83B1-394ED55AF759} = {F16B85B7-65AE-44D2-802F-AF931F3730B2}
 		{04CA88EB-C76C-40EB-ACBC-1C2CB3EAD55C} = {9EC62C8E-33FD-46EA-9164-FA0859EDFB98}
+		{281014E5-3951-4371-9ADE-0530039350BA} = {9EC62C8E-33FD-46EA-9164-FA0859EDFB98}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EB3A414-4F2D-4B0A-A7E4-BFE9FDA0D854}
