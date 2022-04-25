@@ -8,6 +8,7 @@ using BookStore.Persistence.EF.Categories;
 using BookStore.Services.Categories;
 using BookStore.Services.Categories.Contracts;
 using BookStore.Services.Categories.Exceptions;
+using BookStore.Test.Tools;
 using FluentAssertions;
 using Xunit;
 
@@ -33,12 +34,8 @@ namespace BookStore.Services.Test.Unit.Categories
         public void Add_adds_Category_Properly()
         {
             AddCategoryDto dto = GenerateAddCategoryDto();
-            var category = new List<Category>
-            {
-                new Category{Title = "Test1"},
-                new Category{Title = "Test2"},
-                new Category{Title = "Test3"}
-            };
+            var category = CreateListCategory();
+            
             _context.Manipulate(_ =>
                 _.Categories.AddRange(category));
 
@@ -71,10 +68,7 @@ namespace BookStore.Services.Test.Unit.Categories
         public void Update_categories_Update_Properly()
         {
             UpdateCategoryDto dto = GenerateUpdateCategoryDto();
-            var category = new Category
-            {
-                Title = "EditTest"
-            };
+            var category = CreateOnecategory();
 
             _context.Manipulate(_ =>
                 _.Categories.AddRange(category));
@@ -94,7 +88,18 @@ namespace BookStore.Services.Test.Unit.Categories
 
             expected.Should().ThrowExactly<CategoryNotFoundException>();
         }
+
+        [Fact]
+        public void Throw_Delete_CategoryNotExists()
+        {
+            var category = CreateFactory.Create("Dummy Categories");
+
+            Action expected = () => _sut.Delete(category.Id);
+
+            expected.Should().ThrowExactly<CategoryIdNotFoundException>();
+        }
         
+
         [Fact]
         public void Delete_categories_Delete_Properly()
         {
@@ -126,6 +131,26 @@ namespace BookStore.Services.Test.Unit.Categories
                 Title = "dummy"
             };
         }
+        
+        private static List<Category> CreateListCategory()
+        {
+            var category = new List<Category>
+            {
+                new Category {Title = "Test1"},
+                new Category {Title = "Test2"},
+                new Category {Title = "Test3"}
+            };
+            return category;
+        }
+        private static Category CreateOnecategory()
+        {
+            var category = new Category
+            {
+                Title = "EditTest"
+            };
+            return category;
+        }
+
     }
 
 }

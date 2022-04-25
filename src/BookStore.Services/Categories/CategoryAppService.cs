@@ -49,8 +49,16 @@ namespace BookStore.Services.Categories
 
         public void Delete(int id)
         {
-            _categoryRepository.Delete(id);
-            _unitOfWork.Commit();
+            if (_categoryRepository.FindById(id) != null)
+            {
+                _categoryRepository.Delete(id);
+                _unitOfWork.Commit();
+            }
+            else
+            {
+                throw new CategoryIdNotFoundException();
+            }
+            
         }
     }
 }
