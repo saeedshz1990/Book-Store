@@ -56,7 +56,7 @@ namespace BookStore.Services.Books
             _unitOfWork.Commit();
         }
 
-        public IList<Book> GetAll()
+        public IList<GetBookDto> GetAll()
         {
             return _bookRepository.GetAll();
         }

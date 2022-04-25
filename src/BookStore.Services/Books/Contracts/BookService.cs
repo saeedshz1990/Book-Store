@@ -8,6 +8,6 @@ namespace BookStore.Services.Books.Contracts
         void Add(AddBookDto dto);
         void Update(UpdateBookDto dto,int id);
         void Delete(int id);
-        IList<Book> GetAll();
+        IList<GetBookDto> GetAll();
     }
 }
